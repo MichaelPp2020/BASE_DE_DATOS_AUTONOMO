@@ -1,0 +1,59 @@
+/*=============================================================*
+                                       CONSULTA #1
+*=============================================================*/
+
+/*====================================================================*/
+/*Histórico de referencias por Niñera */
+
+  SELECT NINERA.ID_NINERA, NINERA.AP_Y_NOM_NINERA AS NIÑERA, REFERENCIA.AP_Y_NOM_REFERENCIA AS REFERENCIA_A		
+FROM NINERA 
+INNER JOIN REFERENCIA ON  REFERENCIA.ID_REFERNCIA  = NINERA.ID_NINERA
+
+
+/*=============================================================================*/
+                                     /*CONSULTA #2*/
+/*============================================================================*/
+
+/*====================================*/
+                                   /*Histórico de solicitudes por cliente */
+
+select  PEDIDO.ID_PEDIDO,CLIENTE.AP_Y_NOM__CLIENTE AS CLIENTE, PEDIDO.ESTADO_PEDIDO AS SOLICITUDES 
+from PEDIDO
+INNER JOIN CLIENTE ON  CLIENTE.AP_Y_NOM__CLIENTE  = PEDIDO.AP_Y_NOM__CLIENTE
+ORDER BY CLIENTE.AP_Y_NOM__CLIENTE
+
+
+/*=============================================================================*/
+        /*                             CONSULTA #3*/
+/*============================================================================*/
+
+/*===============================================*/
+/*Histórico de calificación por niñera*/
+
+ SELECT NINERA.AP_Y_NOM_NINERA AS NIÑERA,NINERA.CALIFICACION_NINERA as calificacion FROM NINERA
+	 ORDER BY NINERA.CALIFICACION_NINERA DESC
+
+
+/*=============================================================================*/
+                           /*          CONSULTA #4*/
+/*============================================================================*/
+/*===============================================*/
+/*Histórico  de ocasiones en la que anuló  solicitudes*/
+
+select  PEDIDO.ID_PEDIDO,CLIENTE.AP_Y_NOM__CLIENTE AS CLIENTE,PEDIDO.FECHA_INGRESO as fecha, PEDIDO.ESTADO_PEDIDO 
+ AS SOLICITUDES 
+ from 	PEDIDO
+	INNER JOIN CLIENTE ON  CLIENTE.AP_Y_NOM__CLIENTE  = PEDIDO.AP_Y_NOM__CLIENTE
+	where PEDIDO.ESTADO_PEDIDO='anulado' 
+	ORDER BY CLIENTE.AP_Y_NOM__CLIENTE
+
+
+/*=============================================================================*/
+                         /*            CONSULTA #5 */
+/*============================================================================*/
+/*Histórico  de ingreso por niñero*/
+
+SELECT INGRESO.AP_Y_NOM_NINERA AS NIÑERA ,SUM (INGRESO.INGRESO_NINERA ) AS SUMA_INGRESO FROM INGRESO
+GROUP BY INGRESO.AP_Y_NOM_NINERA 
+ORDER BY SUMA_INGRESO DESC
+  
